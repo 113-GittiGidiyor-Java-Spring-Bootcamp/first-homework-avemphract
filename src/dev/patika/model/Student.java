@@ -3,7 +3,7 @@ package dev.patika.model;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
+//değişiklik
 public class Student {
     String name;
     Date birthDate;
