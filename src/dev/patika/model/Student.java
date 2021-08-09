@@ -3,6 +3,8 @@ package dev.patika.model;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+///sadsda
+
 public class Student {
     String name;
     Date birthDate;
