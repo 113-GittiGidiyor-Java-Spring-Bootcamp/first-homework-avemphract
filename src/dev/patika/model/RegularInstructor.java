@@ -1,11 +1,13 @@
 package dev.patika.model;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 
+@Entity
 public class PermanentInstructor extends Instructor {
     double constantSalary;
 
-    public PermanentInstructor(String name, String address, double phoneNumber, double constantSalary, Course... courses) {
+    public PermanentInstructor(String name, String address, long phoneNumber, double constantSalary, Course... courses) {
         super(name, address, phoneNumber, courses);
         this.constantSalary = constantSalary;
     }
@@ -38,8 +40,4 @@ public class PermanentInstructor extends Instructor {
         return Double.compare(that.constantSalary, constantSalary) == 0;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(constantSalary);
-    }
 }
