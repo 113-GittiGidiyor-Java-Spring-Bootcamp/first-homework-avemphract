@@ -11,24 +11,39 @@ import java.util.Arrays;
 
 public class InsuranceApiClient {
     public static void main(String[] args) {
-        //saveDate();
+        EntityManager entityManager= EntityManagerUtils.getEntityManager("mysqlPU");
+        saveData(entityManager);
         StudentController studentController=new StudentController();
-        //Student student=new Student("Emirhan Akar",LocalDate.of(2000,Month.FEBRUARY,4),"Denizli","Erkek");
-        //studentController.saveStudent(student);
 
-        deleteData();
+        //---print---
+        System.out.println("---");
+        int i=1;
         for(Student s:studentController.findAllStudents()){
-            System.out.print(studentController.getIdFromName(s.getName()));
+            System.out.print(i+++" - ");
             System.out.println(s.toString());
         }
-    }
 
-    private static void deleteData(){
-        StudentController studentController=new StudentController();
+        Student student=new Student("Emirhan Akar",LocalDate.of(2000,Month.FEBRUARY,4),"Denizli","Erkek");
+        studentController.saveStudent(student);
+        //---print---
+        System.out.println("---");
+        i=1;
+        for(Student s:studentController.findAllStudents()){
+            System.out.print(i+++" - ");
+            System.out.println(s.toString());
+        }
         studentController.deleteFromDatabase(studentController.getIdFromName("Emre Çatalkaya"));
+        //---print---
+        System.out.println("---");
+        i=1;
+        for(Student s:studentController.findAllStudents()) {
+            System.out.print(i+++" - ");
+            System.out.println(s.toString());
+        }
+
     }
 
-    private static void saveDate(){
+    private static void saveData(EntityManager entityManager){
 
         GuestInstructor instructor1=new GuestInstructor("Bartu Baran","Konya",+904512314778L,45);
         GuestInstructor instructor2=new GuestInstructor("Nurcihan Çağlayan","Artvin",+907415423247L,60);
@@ -66,7 +81,6 @@ public class InsuranceApiClient {
         student8.setCourses(Arrays.asList(course2,course3,course5));
         student9.setCourses(Arrays.asList(course2,course4,course5));
 
-        EntityManager entityManager= EntityManagerUtils.getEntityManager("mysqlPU");
         saveObject(entityManager,
                 instructor1,instructor2,instructor3,
                 course1,course2,course3,course4,course5,
