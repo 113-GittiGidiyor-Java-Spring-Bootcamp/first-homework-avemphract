@@ -1,27 +1,36 @@
 package dev.patika.model;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.*;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Student {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
     String name;
-    Date birthDate;
+    LocalDate birthDate;
     String address;
     String sex;
-    List<Course> courses;
+    @ManyToMany
+    List<Course> courses=new ArrayList<>();
 
-    public Student(String name, Date birthDate, String address, String sex, List<Course> courses) {
+    public Student(String name, LocalDate birthDate, String address, String sex, Course... courses) {
         this.name = name;
         this.birthDate = birthDate;
         this.address = address;
         this.sex = sex;
-        this.courses = courses;
+        if (courses!=null)
+            Collections.addAll(this.courses,courses);
     }
 
     public Student() {
     }
 
     //getter setter
+
     public String getName() {
         return name;
     }
@@ -30,11 +39,11 @@ public class Student {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -80,6 +89,6 @@ public class Student {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, birthDate, address, sex, courses);
+        return Objects.hash(name, birthDate);
     }
 }

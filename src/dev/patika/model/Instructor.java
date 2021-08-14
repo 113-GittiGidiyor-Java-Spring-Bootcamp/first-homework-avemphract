@@ -1,19 +1,26 @@
 package dev.patika.model;
 
-import java.util.Arrays;
-import java.util.List;
+import javax.persistence.*;
+import java.util.*;
 
+@Entity @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Instructor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     String name;
     String address;
-    double phoneNumber;
-    List<Course> courses;
+    long phoneNumber;
+    @OneToMany(mappedBy = "instructor")
+    List<Course> courses=new ArrayList<>();
 
-    public Instructor(String name, String address, double phoneNumber, Course... courses) {
+    public Instructor(String name, String address, long phoneNumber, Course... courses) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.courses = Arrays.asList(courses);
+        if (courses!=null)
+        Collections.addAll(this.courses,courses);
     }
 
     public Instructor() {
@@ -36,11 +43,11 @@ public abstract class Instructor {
         this.address = address;
     }
 
-    public double getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(double phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -50,5 +57,10 @@ public abstract class Instructor {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phoneNumber);
     }
 }

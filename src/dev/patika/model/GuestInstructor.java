@@ -1,11 +1,13 @@
 package dev.patika.model;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 
+@Entity
 public class GuestInstructor extends Instructor {
     double hourlySalary;
 
-    public GuestInstructor(String name, String address, double phoneNumber, double hourlySalary, Course... courses) {
+    public GuestInstructor(String name, String address, long phoneNumber, double hourlySalary, Course... courses) {
         super(name, address, phoneNumber, courses);
         this.hourlySalary=hourlySalary;
     }
@@ -37,10 +39,5 @@ public class GuestInstructor extends Instructor {
         if (o == null || getClass() != o.getClass()) return false;
         GuestInstructor that = (GuestInstructor) o;
         return Double.compare(that.hourlySalary, hourlySalary) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(hourlySalary);
     }
 }

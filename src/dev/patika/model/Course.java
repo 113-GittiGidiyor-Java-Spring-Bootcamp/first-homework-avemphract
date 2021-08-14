@@ -1,11 +1,17 @@
 package dev.patika.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Course {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
     String courseName;
     String courseCode;
     double credit;
+    @ManyToOne
     Instructor instructor;
 
     public Course(String courseName, String courseCode, double credit, Instructor instructor) {
@@ -70,6 +76,6 @@ public class Course {
 
     @Override
     public int hashCode() {
-        return Objects.hash(courseName, courseCode, credit, instructor);
+        return Objects.hash(courseName, courseCode);
     }
 }

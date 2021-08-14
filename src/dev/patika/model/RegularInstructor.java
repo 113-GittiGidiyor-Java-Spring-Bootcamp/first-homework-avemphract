@@ -1,18 +1,17 @@
 package dev.patika.model;
 
 import javax.persistence.Entity;
-import java.util.Objects;
 
 @Entity
-public class PermanentInstructor extends Instructor {
+public class RegularInstructor extends Instructor {
     double constantSalary;
 
-    public PermanentInstructor(String name, String address, long phoneNumber, double constantSalary, Course... courses) {
+    public RegularInstructor(String name, String address, long phoneNumber, double constantSalary, Course... courses) {
         super(name, address, phoneNumber, courses);
         this.constantSalary = constantSalary;
     }
 
-    public PermanentInstructor() {
+    public RegularInstructor() {
     }
 
     //getter setter
@@ -36,7 +35,7 @@ public class PermanentInstructor extends Instructor {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PermanentInstructor that = (PermanentInstructor) o;
+        RegularInstructor that = (RegularInstructor) o;
         return Double.compare(that.constantSalary, constantSalary) == 0;
     }
 
